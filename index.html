@@ -129,6 +129,110 @@
 
   .site-footer a { color: rgba(255, 255, 255, 0.55); text-decoration: none; }
   .site-footer a:hover { color: #ffffff; }
+
+  /* ---------- features stack ---------- */
+
+  .section-features {
+    background: var(--body-bg-1);
+    padding: 100px 0 60px;
+  }
+
+  .features-inner {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 100px;
+  }
+
+  .features-inner .placeholder-label {
+    display: block;
+    margin-bottom: 32px;
+    padding: 0 0 0 0;
+  }
+
+  .stack-wrap {
+    position: relative;
+    perspective: 1000px;
+  }
+
+  .stack-card {
+    position: sticky;
+    top: 110px;
+    background: #ffffff;
+    color: #1a1a1a;
+    border-radius: 20px;
+    padding: 48px 56px 56px;
+    min-height: 420px;
+    margin-bottom: 32px;
+    transform-origin: top center;
+    will-change: transform, opacity;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .stack-card:nth-child(1) { z-index: 1; }
+  .stack-card:nth-child(2) { z-index: 2; }
+  .stack-card:nth-child(3) { z-index: 3; }
+  .stack-card:nth-child(4) { z-index: 4; }
+
+  .stack-header {
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 24px;
+    margin-bottom: 48px;
+  }
+
+  .stack-header h3 {
+    font-size: clamp(24px, 3vw, 36px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: #1a1a1a;
+  }
+
+  .stack-content {
+    display: grid;
+    grid-template-columns: minmax(120px, 300px) 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .stack-num {
+    font-size: clamp(48px, 12vw, 210px);
+    font-weight: 400;
+    line-height: 0.85;
+  }
+
+  .stack-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .stack-body li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555555;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .stack-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #999999;
+  }
+
+  @media (max-width: 860px) {
+    .features-inner { padding: 0 24px; }
+    .stack-card { padding: 32px; min-height: auto; }
+    .stack-content { grid-template-columns: 1fr; gap: 24px; }
+    .stack-num { font-size: clamp(42px, 15vw, 90px); }
+  }
 </style>
 </head>
 <body>
@@ -151,8 +255,72 @@
     <span class="placeholder-label">Section 2 &mdash; white</span>
   </section>
 
-  <section class="section section-dark-2">
-    <span class="placeholder-label">Section 3 &mdash; #282828</span>
+  <section class="section-features" id="features">
+    <div class="features-inner">
+      <span class="placeholder-label">Features</span>
+
+      <div class="stack-wrap">
+        <article class="stack-card">
+          <div class="stack-header"><h3>Priming Teams</h3></div>
+          <div class="stack-content">
+            <div class="stack-num" style="color:#8FE8AE;">1</div>
+            <div class="stack-body">
+              <ul>
+                <li>Easy onboarding &amp; feedback collection</li>
+                <li>Collect direct report and peer feedback &mdash; a true, rounded 360</li>
+                <li>AI feedback coach</li>
+                <li>In-person training for leaders and teams on request</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="stack-card">
+          <div class="stack-header"><h3>Leadership Insights</h3></div>
+          <div class="stack-content">
+            <div class="stack-num" style="color:#6FCBF2;">2</div>
+            <div class="stack-body">
+              <ul>
+                <li>Clarity Report &mdash; what's working, and exactly where to focus next</li>
+                <li>Team &amp; individual feedback data</li>
+                <li>Psychological safety score &amp; team personality</li>
+                <li>Anonymous by design, conversational by choice &mdash; leaders can reply and follow up, safely via the messaging system</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="stack-card">
+          <div class="stack-header"><h3>Generate Change</h3></div>
+          <div class="stack-content">
+            <div class="stack-num" style="color:#F4CE5C;">3</div>
+            <div class="stack-body">
+              <ul>
+                <li>Tailored action plans &amp; nudge library</li>
+                <li>Curated learning content</li>
+                <li>Development support &amp; progress pulse check-ins</li>
+                <li>Access to expert coaching</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="stack-card">
+          <div class="stack-header"><h3>Organisation Insights</h3></div>
+          <div class="stack-content">
+            <div class="stack-num" style="color:#C98F92;">4</div>
+            <div class="stack-body">
+              <ul>
+                <li>Organisational analytics</li>
+                <li>Peer support / leader community</li>
+                <li>Guidance for HR leads</li>
+                <li>CPD mapping</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
   <section class="section section-darkest">
@@ -169,6 +337,64 @@
 <script>
   document.getElementById('copyright').textContent =
     '© ' + new Date().getFullYear() + ' ARC 360 is a trading name of BfMAT.';
+
+  (function () {
+    var cards = document.querySelectorAll('.stack-card');
+    if (!cards.length) return;
+
+    function update() {
+      cards.forEach(function (card, i) {
+        var next = cards[i + 1];
+        if (!next) {
+          card.style.transform = '';
+          card.style.opacity = 1;
+          return;
+        }
+
+        // Tie the recede animation to actual physical coverage: progress is 0
+        // until the incoming card's top edge reaches this card's bottom edge,
+        // and 1 once it's fully aligned on top. That way this card only ever
+        // fades/tilts under cover of the opaque incoming card — no gap where
+        // you'd see through to the card or background behind it.
+        var cardRect = card.getBoundingClientRect();
+        var nextTop = next.getBoundingClientRect().top;
+
+        var coverStart = cardRect.bottom;
+        var coverEnd = cardRect.top;
+
+        var progress = (coverStart - nextTop) / (coverStart - coverEnd);
+        progress = Math.min(Math.max(progress, 0), 1);
+
+        var rotate = progress * 6;
+        var scale = 1 - progress * 0.05;
+        var translateY = progress * -24;
+
+        card.style.transform =
+          'translateY(' + translateY + 'px) scale(' + scale + ') rotateX(-' + rotate + 'deg)';
+        card.style.opacity = 1 - progress * 0.4;
+
+        // the incoming card itself stays fully solid and already sits above
+        // this one in paint order (later siblings paint on top), so it reads
+        // as "solid white, snapped to the front" the instant it arrives.
+        next.style.opacity = 1;
+      });
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          update();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 </script>
 
 </body>
