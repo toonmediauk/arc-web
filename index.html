@@ -399,41 +399,16 @@
     line-height: 1.3;
   }
 
-  .traits-rows-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .traits-row {
+  .traits-grid-flow {
+    --c1: 1fr; --c2: 1fr; --c3: 1fr; --c4: 1fr; --c5: 1fr; --c6: 1fr;
+    --c7: 1fr; --c8: 1fr; --c9: 1fr; --c10: 1fr; --c11: 1fr; --c12: 1fr;
     display: grid;
-    align-items: start;
+    grid-template-columns:
+      var(--c1) var(--c2) var(--c3) var(--c4) var(--c5) var(--c6)
+      var(--c7) var(--c8) var(--c9) var(--c10) var(--c11) var(--c12);
     gap: 24px;
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      grid-template-columns 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .traits-rows-wrap.in-view .traits-row {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .traits-row[data-row="1"] {
-    --c1: 1.3fr; --c2: 0.85fr; --c3: 1fr;
-    grid-template-columns: var(--c1) var(--c2) var(--c3);
-  }
-
-  .traits-row[data-row="2"] {
-    --c1: 1.5fr; --c2: 1fr;
-    grid-template-columns: var(--c1) var(--c2);
-  }
-
-  .traits-row[data-row="3"] {
-    --c1: 1fr; --c2: 1.4fr;
-    grid-template-columns: var(--c1) var(--c2);
+    align-items: start;
+    transition: grid-template-columns 1s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .trait-card {
@@ -441,7 +416,19 @@
     aspect-ratio: 1;
     border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+  }
+
+  .traits-grid-flow.in-view .trait-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .trait-card:hover {
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
+    z-index: 2;
   }
 
   .trait-card-label {
@@ -481,9 +468,8 @@
   @media (max-width: 900px) {
     .traits-grid-inner { grid-template-columns: 1fr; padding: 0 24px; gap: 24px; }
     .traits-grid-label h3 { position: static; }
-    .traits-row[data-row="1"],
-    .traits-row[data-row="2"],
-    .traits-row[data-row="3"] { grid-template-columns: repeat(2, 1fr) !important; }
+    .traits-grid-flow { grid-template-columns: repeat(2, 1fr); }
+    .trait-card { grid-column: span 1 !important; }
   }
 
   /* ---------- contact ---------- */
@@ -832,54 +818,48 @@
       <div class="traits-grid-label">
         <h3>7 Leadership Traits of ARC</h3>
       </div>
-      <div class="traits-rows-wrap">
-        <div class="traits-row" data-row="1">
-          <div class="trait-card" style="background:#ff8661;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Listening, adapting and connecting clearly across the organisation &mdash; even under pressure.</p>
-            </div>
-            <span class="trait-card-label">Communication</span>
+      <div class="traits-grid-flow">
+        <div class="trait-card" style="background:#ff8661; grid-column: 1 / span 5;" data-col-start="1" data-col-span="5">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Listening, adapting and connecting clearly across the organisation &mdash; even under pressure.</p>
           </div>
-          <div class="trait-card" style="background:#1c858e;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Sharing openly, welcoming feedback and believing everyone can learn and grow.</p>
-            </div>
-            <span class="trait-card-label">Openness</span>
-          </div>
-          <div class="trait-card" style="background:#94ffad;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Coaching, challenging and protecting the growth of every team member.</p>
-            </div>
-            <span class="trait-card-label">Developing & Supporting Others</span>
-          </div>
+          <span class="trait-card-label">Communication</span>
         </div>
-        <div class="traits-row" data-row="2">
-          <div class="trait-card" style="background:#f9d65e;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Embracing new ways of working and fostering a culture that drives positive change.</p>
-            </div>
-            <span class="trait-card-label">Innovating</span>
+        <div class="trait-card" style="background:#1c858e; grid-column: 6 / span 3;" data-col-start="6" data-col-span="3">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Sharing openly, welcoming feedback and believing everyone can learn and grow.</p>
           </div>
-          <div class="trait-card" style="background:#685696;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Understanding their impact, managing themselves and acting on areas to develop.</p>
-            </div>
-            <span class="trait-card-label">Self-Awareness</span>
-          </div>
+          <span class="trait-card-label">Openness</span>
         </div>
-        <div class="traits-row" data-row="3">
-          <div class="trait-card" style="background:#66d2ff;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Delegating, building confidence and trusting the team to own their work.</p>
-            </div>
-            <span class="trait-card-label">Empowering</span>
+        <div class="trait-card" style="background:#94ffad; grid-column: 9 / span 4;" data-col-start="9" data-col-span="4">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Coaching, challenging and protecting the growth of every team member.</p>
           </div>
-          <div class="trait-card" style="background:#cd9089;">
-            <div class="trait-card-hover">
-              <p class="trait-hover-desc">Uniting the team behind a shared purpose and a clear direction.</p>
-            </div>
-            <span class="trait-card-label">Collective Responsibility</span>
+          <span class="trait-card-label" style="color:#1a1a1a;">Developing & Supporting Others</span>
+        </div>
+        <div class="trait-card" style="background:#f9d65e; grid-column: 1 / span 7;" data-col-start="1" data-col-span="7">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Embracing new ways of working and fostering a culture that drives positive change.</p>
           </div>
+          <span class="trait-card-label">Innovating</span>
+        </div>
+        <div class="trait-card" style="background:#685696; grid-column: 8 / span 5;" data-col-start="8" data-col-span="5">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Understanding their impact, managing themselves and acting on areas to develop.</p>
+          </div>
+          <span class="trait-card-label">Self-Awareness</span>
+        </div>
+        <div class="trait-card" style="background:#66d2ff; grid-column: 1 / span 5;" data-col-start="1" data-col-span="5">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Delegating, building confidence and trusting the team to own their work.</p>
+          </div>
+          <span class="trait-card-label">Empowering</span>
+        </div>
+        <div class="trait-card" style="background:#cd9089; grid-column: 6 / span 7;" data-col-start="6" data-col-span="7">
+          <div class="trait-card-hover">
+            <p class="trait-hover-desc">Uniting the team behind a shared purpose and a clear direction.</p>
+          </div>
+          <span class="trait-card-label">Collective Responsibility</span>
         </div>
       </div>
     </div>
@@ -1170,47 +1150,51 @@
   })();
 
 
-  // Reveal-on-scroll + per-row hover-expand for the leadership traits grid:
-  // rows fade/rise in once when scrolled into view, then hovering a card
-  // grows its own column track within its row (others in that row shrink to
-  // make room) while every other row is left untouched.
+  // Reveal-on-scroll + gentle hover-expand for the leadership traits grid.
+  // Cards share one 12-column grid (rather than independent per-row grids)
+  // so their edges line up cleanly across rows even though tile sizes vary.
+  // On hover, the columns a card occupies widen slightly and the rest ease
+  // back, all on a slow, smooth transition so neighbouring rows aren't
+  // wrenched about.
   (function () {
-    var wrap = document.querySelector('.traits-rows-wrap');
-    if (!wrap) return;
+    var grid = document.querySelector('.traits-grid-flow');
+    if (!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.trait-card'));
+
+    cards.forEach(function (card, i) {
+      card.style.transitionDelay = (i * 60) + 'ms';
+
+      var start = parseInt(card.dataset.colStart, 10);
+      var span = parseInt(card.dataset.colSpan, 10);
+      if (!start || !span) return;
+
+      card.addEventListener('mouseenter', function () {
+        for (var c = 1; c <= 12; c++) {
+          var within = c >= start && c < start + span;
+          grid.style.setProperty('--c' + c, within ? '1.15fr' : '0.9fr');
+        }
+      });
+
+      card.addEventListener('mouseleave', function () {
+        for (var c = 1; c <= 12; c++) {
+          grid.style.removeProperty('--c' + c);
+        }
+      });
+    });
 
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            wrap.classList.add('in-view');
+            grid.classList.add('in-view');
             observer.disconnect();
           }
         });
       }, { threshold: 0.1 });
-      observer.observe(wrap);
+      observer.observe(grid);
     } else {
-      wrap.classList.add('in-view');
+      grid.classList.add('in-view');
     }
-
-    var rows = Array.prototype.slice.call(wrap.querySelectorAll('.traits-row'));
-    rows.forEach(function (row) {
-      var cards = Array.prototype.slice.call(row.querySelectorAll('.trait-card'));
-      var count = cards.length;
-
-      cards.forEach(function (card, i) {
-        card.addEventListener('mouseenter', function () {
-          for (var c = 1; c <= count; c++) {
-            row.style.setProperty('--c' + c, c === (i + 1) ? '1.8fr' : '0.7fr');
-          }
-        });
-
-        card.addEventListener('mouseleave', function () {
-          for (var c = 1; c <= count; c++) {
-            row.style.removeProperty('--c' + c);
-          }
-        });
-      });
-    });
   })();
 
   // Header inverts to dark text/border whenever it's sitting over a white
